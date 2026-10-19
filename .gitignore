@@ -1,0 +1,20 @@
+node_modules/
+
+.env
+.env.*
+!.env.example
+
+reports/
+playwright-report/
+playwright-report-*/
+test-results/
+
+.auth/
+playwright/.auth/
+**/storageState*.json
+**/*auth-state*.json
+
+*.zip
+
+# Authentication state files
+config/auth*.json

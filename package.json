@@ -1,0 +1,32 @@
+{
+  "name": "gxs-mockup-qa",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "auth": "cross-env AUTH_SETUP=true playwright test tests/auth.setup.ts --headed",
+    "inspect": "npm run auth && playwright codegen --load-storage=config/auth.json https://dev.beta.graphxserver.io/mockups",
+    "validate": "tsc --noEmit",
+    "test:dry": "cross-env GXS_EXECUTION_MODE=dry-run ALLOW_SUBMIT=false APPROVE_SUBMISSIONS=false playwright test tests/mockup-repeat.spec.ts --headed",
+    "test:submit": "cross-env GXS_EXECUTION_MODE=live playwright test tests/mockup-repeat.spec.ts --headed",
+    "test:selection": "cross-env AUTH_SETUP=true playwright test tests/product-selection.spec.ts",
+    "check:order": "tsx scripts/check-order.ts",
+    "report": "playwright show-report",
+    "test:minimal": "cross-env GXS_EXECUTION_MODE=dry-run playwright test tests/mockup-minimal.spec.ts --headed --workers=1 --retries=0",
+    "test:minimal:live": "cross-env GXS_EXECUTION_MODE=live playwright test tests/mockup-minimal.spec.ts --headed --workers=1 --retries=0",
+    "minimal:recover": "tsx scripts/reconcile-minimal.ts"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.0",
+    "@types/node": "^22.15.0",
+    "cross-env": "^7.0.3",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "csv-parse": "^7.0.3",
+    "dotenv": "^18.0.7",
+    "image-size": "^2.0.4",
+    "pdf-lib": "^1.17.1"
+  }
+}
